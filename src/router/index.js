@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import menuNav from  "@/components/menuNav"
+// import menuNav from  "@/components/menuNav"
 import Mylove from "@/components/mylove"
 import menus from "@/components/menus"
 import index1 from "@/components/index1"
@@ -30,35 +30,66 @@ export default new Router({
       name :"menus",
       component:menus,
     },
-    {
-      path:'/menuNav',
-      name:'menuNav',
-      component:menuNav,
-      children:[
-        {
-          path:'index1',
-          name:'index1',
-          component:index1,
-        },
-        {
-          path:'index2',
-          name:'index3',
-          component:index2,
-        },
-        {
-          path:'index3',
-          name:'index3',
-          component:index3,
-        },
-        {
-          path:'index4',
-          name:'index4',
-          component:index4,
-        }
-
-      ]
-
-    }
+    // {
+    //   path:'/menuNav',
+    //   name:'menuNav',
+    //   component:menuNav,
+    // }
    
-  ]
+  ],
+
 })
+
+export const personMenu =[{
+  path:"/menus",
+  component:menus,
+  name:menus,
+  meta:{
+    title:"首页",
+    icon:"el-icon-success",
+
+  },
+  
+  children:[{
+    path: "/index1",
+    title:"第一个页面",
+    name:'index1',
+    component:index1,
+    meta:{
+      title: "第一个页面案例",
+      icon: "el-icon-goods",
+    }
+
+  },
+  {    path: "/index2",
+
+    title:"第二个页面",
+    name:"index2",
+    component:index2,
+    meta:{
+      title: "第二个页面案例",
+      icon: "el-icon-goods",
+    }
+  },
+  {
+    path: "/index3",
+    title:"第三个页面",
+    name:"index3",
+    component:index3,
+    meta:{
+      title: "第三个页面案例",
+      icon: "el-icon-goods",
+    }
+  },
+  {
+    path: "/index4",
+    title:"第四个页面",
+    name:"index4",
+    component:index4,
+    meta:{
+      title: "第四个页面案例",
+      icon: "el-icon-goods",
+    }
+  }
+]
+}]

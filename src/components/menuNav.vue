@@ -1,7 +1,10 @@
 <template>
   <el-row class="tac">
     <el-col :span="24">
-<el-menu
+      <!-- default-active   当前激活菜单的index，下标 -->
+      <!-- @open  当前指定的sub-menu  index需要展开的sub-menu的Index -->
+      <!-- @clode 收起指定的sub-menu index需要收起的sub-menu的index -->
+      <el-menu
         :default-active="this.$route.path"
         class="el-menu-vertical-demo"
         @open="handleOpen"
@@ -11,24 +14,19 @@
         active-text-color="#ffd04b"
         router
       >
-        <h3>后台系统后台</h3>
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-s-custom"></i>
-            <span>用户分析</span>
+        <template>
+          <template v-for="(item, index) in menu">
+            <router-link :to="item.path">
+              <el-menu-item :index="item.path">
+              <template slot="title">
+                <!-- <i v-if="item.children[0].meta.icon" ></i> -->
+                {{item.title}}
+
+              </template>
+              </el-menu-item>
+            </router-link>
           </template>
-          <el-menu-item-group>
-            <el-menu-item index="/menuNav/index1">数据统计</el-menu-item>
-            <el-menu-item index="/menuNav/index2">用户管理</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-upload"></i>
-            <span>资料上传</span>
-          </template>
-        </el-submenu>
- 
+        </template>
       </el-menu>
     </el-col>
   </el-row>
@@ -36,7 +34,19 @@
 </template>
 
 <script>
+import { personMenu } from "@/router";
 export default {
+  name: "menuNav",
+  data() {
+    return {
+      menu: ""
+    };
+  },
+  mounted() {
+    console.log(personMenu);
+    this.menu = personMenu[0].children;
+    console.log(this.menu);
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -48,10 +58,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-.tac{
-    width :300px;
-    height: 100%;
-    background-color: rgb(84, 92, 100)
+.tac {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(84, 92, 100);
 }
 </style>
