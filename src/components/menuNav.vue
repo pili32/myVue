@@ -19,7 +19,7 @@
             <router-link :to="item.path">
               <el-menu-item :index="item.path">
               <template slot="title">
-                <!-- <i v-if="item.children[0].meta.icon" ></i> -->
+                <i v-if="item.meta.icon" :class="item.meta.icon" ></i>
                 {{item.title}}
 
               </template>

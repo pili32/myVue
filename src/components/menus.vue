@@ -11,6 +11,8 @@
 
       </el-col>
       <el-col :span="20"id="menuRight" >
+          <router-view />
+
       </el-col>
     </el-row>
   </div>
