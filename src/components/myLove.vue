@@ -1,106 +1,123 @@
 <template >
-<div id="myLove">
-    <img src=".././assets/1.jpg" >
-    <h2>{{msg}}</h2>
-  <el-button  v-on:click="backHistory">返回上一层</el-button>
-  <el-button  v-on:click="NextFloor">跳转下一层</el-button>
-  
-<el-row >
-  <el-col :span="24"><div class="grid-content bg-purple-dark">1</div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="12"><div class="grid-content bg-purple">2</div></el-col>
-  <el-col :span="12"><div class="grid-content bg-purple-light">3</div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
-<el-row :gutter="20">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-
-</div>
-    
+  <div id="myLove">
+    <el-row>
+      <el-col :span="12">
+        <div class="grid-content bg-purple">
+          <el-button v-on:click="backHistory">返回上一层</el-button>
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="grid-content bg-purple-light">
+          <el-button v-on:click="NextFloor">跳转下一层</el-button>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="8">
+        <div class="img1">
+          <img src="../assets/love6.jpg" alt="">
+        </div>
+      </el-col>
+      <el-col :span="8">
+        <div class="img2">
+          <el-carousel height="500px" interval="2000" autoplay>
+            <el-carousel-item v-for="item in list" :key="item.img">
+              <img class="imgs" :src="item.img" alt />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+      </el-col>
+      <el-col :span="8">
+        <div class="img3">
+          <img src="../assets/love7.jpg" alt="">
+          
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+  <!-- <div class="myLove">
+  <span class="demonstration"></span>
+  <el-carousel trigger="click" height="150px">
+    <el-collapse-item v-for="item in 4" :key="item">
+      <h3 class="small"> {{item}}</h3>
+    </el-collapse-item>
+  </el-carousel>
+  </div>-->
 </template>
  
  <script>
-    export default {
-        name:"myLove",
-        data(){
-            return{
-                msg:"我是myLove"
-                
-            }
-        },
-        methods:{
-            backHistory(){
-            this.$router.go(-1);//返回上一层
-        },
-        NextFloor(){
-            this.$router.push({
-            path:'./menus'
-      })
-        }
-
-        }
+export default {
+  name: "myLove",
+  data() {
+    return {
+      msg: "我是myLove",
+      list: [
+        { img: require("../assets/love1.jpg") },
+        { img: require("../assets/love2.jpg") },
+        { img: require("../assets/love3.jpg") },
+        { img: require("../assets/love4.jpg") }
+      ]
+    };
+  },
+  methods: {
+    backHistory() {
+      this.$router.go(-1); //返回上一层
+    },
+    NextFloor() {
+      this.$router.push({
+        path: "./menus"
+      });
     }
- </script>
+  }
+};
+</script>
 
  <style lang="scss">
- #myLove{
-     img{
-         width: 20px;
-         height: 20px;
-     }
-       .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
+#myLove {
+  background: rgb(210, 212, 210);
   .bg-purple {
-    background: #d3dce6;
+    background: #ddd;
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    background: #ddd;
+    text-align: right;
   }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
+  .img1{
+  img{
+   width:100%;
+	height:500px;
   }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
   }
- }
- 
+  .img3{
+    img{
+    width:100%;
+	height:500px;
 
- 
- </style>
+    }
+  }
+}
+
+.block {
+  width: 100%;
+  height: 100%;
+  // border: 1px solid#8896b3;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.el-carousel__item img {
+  width: 100%;
+  height: 100%;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+</style>
 
  

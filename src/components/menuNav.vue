@@ -21,7 +21,6 @@
               <template slot="title">
                 <i v-if="item.meta.icon" :class="item.meta.icon" ></i>
                 {{item.title}}
-
               </template>
               </el-menu-item>
             </router-link>

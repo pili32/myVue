@@ -6,7 +6,7 @@
       <h1>邵帅</h1>
     </div>
     <div id="Imgss">
- 
+
     </div>
   </div>
   </div>
