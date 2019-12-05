@@ -1,95 +1,92 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-// import menuNav from  "@/components/menuNav"
-import Mylove from "@/components/mylove"
-import menus from "@/components/menus"
-import index1 from "@/components/index1"
-import index2 from "@/components/index2"
-import index3 from "@/components/index3"
-import index4 from "@/components/index4"
-
+// 登录页
+const login = () => import('@/components/login')
+const layout = () => import('@/components/layout')
+const main = () => import('@/view/index')
+const table = () => import('@/view/example/table/index')
+const tree = () => import('@/view/example/tree')
+const tableFirst = () => import('@/view/example/table/tableFirst')
+const tableSecond = () => import('@/view/example/table/tableSecond')
 
 Vue.use(Router)
+export const fixedRouter = [{
+  path: '',
+  component: login,
+  hidden: true
+},
+{
+  path: '',
+  component: layout, //整体页面的布局(包含左侧菜单跟主内容区域)
+  children: [{
+    path: 'main',
+    component: main,
+    meta: {
+      title: '首页', //菜单名称
+      roles: ['user', 'admin'], //当前菜单哪些角色可以看到
+      icon: 'el-icon-info' //菜单左侧的icon图标
+    }
+  }]
+},
+]
 
+// 需要权限判断展示的路由 
+export const permissionRouter = [{
+  path: "/example",
+  component: layout,
+  name: "Example",
+  meta: {
+    title: "案例",
+    icon: "el-icon-success",
+    roles: ['admin', 'user']
+  },
+  children: [{
+      path: "/example/table",
+      name: "Table",
+      component: table,
+      meta: {
+        title: "table案例",
+        icon: "el-icon-goods",
+        roles: ['admin']
+      },
+      // 三级菜单写法，对应demotable案例下边的两个菜单
+      children: [{
+          path: "table1",
+          name: "Table1",
+          component: tableFirst,
+          meta: {
+            title: "table1",
+            icon: "el-icon-mobile-phone",
+            roles: ['admin']
+
+          }
+        },
+        {
+          path: "table2",
+          name: "Table2",
+          component: tableSecond,
+          meta: {
+            title: "table2",
+            icon: "el-icon-service",
+            roles: ['admin']
+          }
+        }
+      ]
+    },
+    {
+      path: "tree",
+      name: "Tree",
+      component: tree,
+      meta: {
+        title: "树形菜单",
+        icon: "el-icon-upload",
+        roles: ['user', 'admin']
+      }
+    }
+  ]
+}]
 export default new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path:'/Mylove',
-      name :"Mylove",
-      component:Mylove
-    },
-    {
-      path:'/menus',
-      name :"menus",
-      component:menus,
-    },
-    // {
-    //   path:'/menuNav',
-    //   name:'menuNav',
-    //   component:menuNav,
-    // }
-   
-  ],
+  routes: fixedRouter
 
 })
 
-export const personMenu =[{
-  path:"/menus",
-  component:menus,
-  name:menus,
-  meta:{
-    title:"首页",
-    icon:"el-icon-success",
-
-  },
-  
-  children:[{
-    path: "/index1",
-    title:"第一个页面",
-    name:'index1',
-    component:index1,
-    meta:{
-      title: "第一个页面案例",
-      icon: "el-icon-goods",
-    }
-
-  },
-  {    path: "/index2",
-
-    title:"第二个页面",
-    name:"index2",
-    component:index2,
-    meta:{
-      title: "第二个页面案例",
-      icon: "el-icon-goods",
-    }
-  },
-  {
-    path: "/index3",
-    title:"第三个页面",
-    name:"index3",
-    component:index3,
-    meta:{
-      title: "第三个页面案例",
-      icon: "el-icon-goods",
-    }
-  },
-  {
-    path: "/index4",
-    title:"第四个页面",
-    name:"index4",
-    component:index4,
-    meta:{
-      title: "第四个页面案例",
-      icon: "el-icon-goods",
-    }
-  }
-]
-}]
